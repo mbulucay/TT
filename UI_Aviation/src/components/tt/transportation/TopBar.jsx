@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FaPlusCircle,
   FaArrowAltCircleDown,
-  FaArrowAltCircleUp,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { exportJsonData } from "../../lib/file_operations/file_operations";
@@ -20,16 +19,16 @@ function TopBar() {
 
   return (
     <div className="flex justify-end gap-3">
-        <Link to={"add"} className={`${buttonClasses} bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded`}>
-          <span>
-            <FaPlusCircle fontSize={18} />
-          </span>
-          <span className={`hidden md:flex no-underline text-white font-bold`}>Add</span>
-        </Link>
+      <Link to={"add"} className={`${buttonClasses} bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded`}>
+        <span>
+          <FaPlusCircle fontSize={18} />
+        </span>
+        <span className={`hidden md:flex no-underline text-white font-bold`}>Add</span>
+      </Link>
 
       <button
         className={`${buttonClasses}`}
-        onClick={() => exportJsonData("locations.json", selectedRows)}
+        onClick={() => exportJsonData("transportation.json", selectedRows)}
       >
         <FaArrowAltCircleDown fontSize={18} />
         <span className="hidden md:flex">Export</span>

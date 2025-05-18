@@ -30,7 +30,7 @@ import OrganizationQuery from "./components/maritime/subdirectories/organization
 import Info from "./components/shared/app_pages/Info.jsx";
 import PortsMap from "./components/maritime/subdirectories/port/map/PortsMap.jsx";
 import Locations from "./components/tt/locations/Locations.jsx";
-
+import Transportation from "./components/tt/transportation/Transportation.jsx";
 function App() {
 
 
@@ -64,6 +64,8 @@ function App() {
         <Route index={true} element={<Home />}></Route>
 
         <Route path="locations" element={<Locations />} />
+
+        <Route path="transportations" element={<Transportation />} />
 
         {/* <Route path="admin" element={<Panel />} />
 
