@@ -1,0 +1,353 @@
+
+
+
+-- ##############################################################
+-- İSTANBUL → LONDRA (20 Rota)
+-- ##############################################################
+
+-- Rota 1-3: Taksim → IST Havalimanı → Heathrow → Westminster
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'IST-TAK'), (SELECT id FROM locations WHERE location_code = 'IST-AP'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'IST-AP'), (SELECT id FROM locations WHERE location_code = 'LHR'), '1,3,5'),
+('BUS', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'LON-WST'), '0,1,2,3,4,5,6');
+
+-- Rota 4-6: Kadıköy → Sabiha Gökçen → Gatwick → Camden Market
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'IST-KDK'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'LGW'), '2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LGW'), (SELECT id FROM locations WHERE location_code = 'LON-CMD'), '0,1,2,3,4,5,6');
+
+-- Rota 7-9: Sultanahmet → Sabiha Gökçen → Stansted → Victoria Coach
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-SUL'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'STN'), '0,2,4'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'STN'), (SELECT id FROM locations WHERE location_code = 'LON-VCS'), '0,1,2,3,4,5,6');
+
+-- Rota 10-12: İstanbul Otogarı → IST Havalimanı → Luton → Buckingham Palace
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-BT'), (SELECT id FROM locations WHERE location_code = 'IST-AP'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'IST-AP'), (SELECT id FROM locations WHERE location_code = 'LTN'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LTN'), (SELECT id FROM locations WHERE location_code = 'LON-BKP'), '0,1,2,3,4,5,6');
+
+-- Rota 13-15: Beşiktaş → IST Havalimanı → London City → Covent Garden
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'IST-BSK'), (SELECT id FROM locations WHERE location_code = 'IST-AP'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'IST-AP'), (SELECT id FROM locations WHERE location_code = 'LCY'), '2,4,6'),
+('BUS', (SELECT id FROM locations WHERE location_code = 'LCY'), (SELECT id FROM locations WHERE location_code = 'LON-CVG'), '0,1,2,3,4,5,6');
+
+-- Rota 16-18: Galata Kulesi → IST Havalimanı → Heathrow → Tower of London
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'IST-GLT'), (SELECT id FROM locations WHERE location_code = 'IST-AP'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'IST-AP'), (SELECT id FROM locations WHERE location_code = 'LHR'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'LON-TOL'), '0,1,2,3,4,5,6');
+
+-- Rota 19-20: Atatürk Havalimanı → Heathrow → Hyde Park (Direkt Uçuş + Transfer)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'IST-ATK'), (SELECT id FROM locations WHERE location_code = 'LHR'), '0,1,2,3,4,5,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'LON-HYD'), '0,1,2,3,4,5,6');
+
+-- ##############################################################
+-- ANKARA → MANCHESTER (10 Rota)
+-- ##############################################################
+
+-- Rota 21-23: Ankara Merkez → Esenboğa → Manchester Airport → Old Trafford
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ANK-CC'), (SELECT id FROM locations WHERE location_code = 'ESB'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ESB'), (SELECT id FROM locations WHERE location_code = 'MAN'), '1,4'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'MAN'), (SELECT id FROM locations WHERE location_code = 'MAN-OTS'), '0,1,2,3,4,5,6');
+
+-- Rota 24-26: Kızılay → Esenboğa → Manchester → Etihad Stadium
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'ANK-KZL'), (SELECT id FROM locations WHERE location_code = 'ESB'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ESB'), (SELECT id FROM locations WHERE location_code = 'MAN'), '3,5'),
+('BUS', (SELECT id FROM locations WHERE location_code = 'MAN'), (SELECT id FROM locations WHERE location_code = 'MAN-ETI'), '0,1,2,3,4,5,6');
+
+-- Rota 27-29: Anıtkabir → Esenboğa → Edinburgh → Royal Mile
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'ANK-ANT'), (SELECT id FROM locations WHERE location_code = 'ESB'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ESB'), (SELECT id FROM locations WHERE location_code = 'EDI'), '0,2,4'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'EDI'), (SELECT id FROM locations WHERE location_code = 'EDI-RML'), '0,1,2,3,4,5,6');
+
+-- Rota 30: Direkt Uçuş (Esenboğa → Manchester)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ESB'), (SELECT id FROM locations WHERE location_code = 'MAN'), '1,3,5');
+
+-- ##############################################################
+-- İZMİR → GLASGOW (10 Rota)
+-- ##############################################################
+
+-- Rota 31-33: İzmir Merkez → Adnan Menderes → Glasgow Airport → Glasgow Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IZM-CC'), (SELECT id FROM locations WHERE location_code = 'ADB'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'GLA'), '0,2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'GLA'), (SELECT id FROM locations WHERE location_code = 'GLA-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 34-36: Alsancak → Adnan Menderes → Heathrow → Hyde Park
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'IZM-ALS'), (SELECT id FROM locations WHERE location_code = 'ADB'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'LHR'), '1,3,5'),
+('BUS', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'LON-HYD'), '0,1,2,3,4,5,6');
+
+-- Rota 37-39: Ephesus → Adnan Menderes → Gatwick → Brighton Beach
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'IZM-EPH'), (SELECT id FROM locations WHERE location_code = 'ADB'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'LGW'), '2,4,6'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'LGW'), (SELECT id FROM locations WHERE location_code = 'BHN-BCH'), '0,1,2,3,4,5,6');
+
+-- Rota 40: Direkt Uçuş (Adnan Menderes → Edinburgh)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'EDI'), '0,2,4');
+
+-- ##############################################################
+-- ANTALYA → BIRMINGHAM (10 Rota)
+-- ##############################################################
+
+-- Rota 41-43: Antalya Merkez → AYT → Birmingham Airport → Bullring
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ANT-CC'), (SELECT id FROM locations WHERE location_code = 'AYT'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'BHX'), '0,2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'BHX'), (SELECT id FROM locations WHERE location_code = 'BHM-BLR'), '0,1,2,3,4,5,6');
+
+-- Rota 44-46: Lara Beach → AYT → Birmingham → New Street Station
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'ANT-LRB'), (SELECT id FROM locations WHERE location_code = 'AYT'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'BHX'), '1,3,5'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'BHX'), (SELECT id FROM locations WHERE location_code = 'BHM-NS'), '0,1,2,3,4,5,6');
+
+-- Rota 47-49: Aspendos → AYT → Heathrow → Stonehenge
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ANT-ASP'), (SELECT id FROM locations WHERE location_code = 'AYT'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'LHR'), '2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'STH'), '0,1,2,3,4,5,6');
+
+-- Rota 50: Direkt Uçuş (Antalya → Birmingham)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'BHX'), '1,3,5');
+
+-- ##############################################################
+-- DİĞER ROTALAR (10 Adet)
+-- ##############################################################
+
+-- Rota 51-53: Bursa → Yenişehir → Stansted → Cambridge
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'STN'), '1,3,5'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'STN'), (SELECT id FROM locations WHERE location_code = 'CBG-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 54-56: Kapadokya → Nevşehir → Gatwick → Bath
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('UBER', (SELECT id FROM locations WHERE location_code = 'NEV-CAP'), (SELECT id FROM locations WHERE location_code = 'NAV'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'NAV'), (SELECT id FROM locations WHERE location_code = 'LGW'), '2,4,6'),
+('BUS', (SELECT id FROM locations WHERE location_code = 'LGW'), (SELECT id FROM locations WHERE location_code = 'BTH-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 57-59: Bodrum → BJV → Luton → Windsor Castle
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'BJV-CC'), (SELECT id FROM locations WHERE location_code = 'BJV'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'BJV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LTN'), (SELECT id FROM locations WHERE location_code = 'WND-CAS'), '0,1,2,3,4,5,6');
+
+-- Rota 60: Direkt Uçuş (Bodrum → Gatwick)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'BJV'), (SELECT id FROM locations WHERE location_code = 'LGW'), '0,1,2,3,4,5,6');
+
+
+
+-- Rota 61-63: Trabzon → Trabzon Havalimanı → Edinburgh → Loch Ness
+
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'TRA-CC'), (SELECT id FROM locations WHERE location_code = 'TRA-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'TRA-HV'), (SELECT id FROM locations WHERE location_code = 'EDI'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'EDI'), (SELECT id FROM locations WHERE location_code = 'LOC-NES'), '0,1,2,3,4,5,6');
+
+-- Rota 64-66: Mardin → Mardin Havalimanı → Manchester → Peak District
+
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'MRD-CC'), (SELECT id FROM locations WHERE location_code = 'MRD-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'MRD-HV'), (SELECT id FROM locations WHERE location_code = 'MAN'), '2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'MAN'), (SELECT id FROM locations WHERE location_code = 'PEAK-DIS'), '0,1,2,3,4,5,6');
+
+-- Rota 67-69: Gaziantep → Gaziantep Havalimanı → Birmingham → Cotswolds
+
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'GAZ-CC'), (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), (SELECT id FROM locations WHERE location_code = 'BHX'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'BHX'), (SELECT id FROM locations WHERE location_code = 'COT-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 70: Direkt Uçuş (Gaziantep → Birmingham)
+
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), (SELECT id FROM locations WHERE location_code = 'BHX'), '0,1,2,3,4,5,6');
+-- ##############################################################
+
+-- Rota 71-73: Adana → Adana Havalimanı → London City → Oxford
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ADA-CC'), (SELECT id FROM locations WHERE location_code = 'ADA-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADA-HV'), (SELECT id FROM locations WHERE location_code = 'LCY'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LCY'), (SELECT id FROM locations WHERE location_code = 'OXF-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 74-76: Kayseri → Kayseri Havalimanı → Luton → Stratford
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'KAY-CC'), (SELECT id FROM locations WHERE location_code = 'KAY-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'KAY-HV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '2,4,6'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'LTN'), (SELECT id FROM locations WHERE location_code = 'STR-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 77-79: Samsun → Samsun Havalimanı → Stansted → Brighton
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'SSM-CC'), (SELECT id FROM locations WHERE location_code = 'SSM-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SSM-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'STN'), (SELECT id FROM locations WHERE location_code = 'BHN-BCH'), '0,1,2,3,4,5,6');
+
+-- Rota 80: Direkt Uçuş (Samsun → Stansted)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SSM-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '0,1,2,3,4,5,6');
+-- ##############################################################
+
+-- Rota 81-83: Trabzon → Trabzon Havalimanı → London City → Liverpool
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'TRA-CC'), (SELECT id FROM locations WHERE location_code = 'TRA-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'TRA-HV'), (SELECT id FROM locations WHERE location_code = 'LCY'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LCY'), (SELECT id FROM locations WHERE location_code = 'LIV-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 84-86: Gaziantep → Gaziantep Havalimanı → Heathrow → Windsor
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'GAZ-CC'), (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), (SELECT id FROM locations WHERE location_code = 'LHR'), '2,4,6'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'WND-CAS'), '0,1,2,3,4,5,6');
+
+-- Rota 87: Direkt Uçuş (Gaziantep → Heathrow)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'GAZ-HV'), (SELECT id FROM locations WHERE location_code = 'LHR'), '0,1,2,3,4,5,6');
+
+-- Rota 88-90: Antalya → Antalya Havalimanı → Luton → Oxford
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ANT-CC'), (SELECT id FROM locations WHERE location_code = 'ANT-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ANT-HV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LTN'), (SELECT id FROM locations WHERE location_code = 'OXF-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 91: Direkt Uçuş (Antalya → Luton)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ANT-HV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '0,1,2,3,4,5,6');
+
+-- Rota 92-94: Bodrum → Bodrum Havalimanı → Stansted → Cambridge
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'BJV-CC'), (SELECT id FROM locations WHERE location_code = 'BJV-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'BJV-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '1,3,5'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'STN'), (SELECT id FROM locations WHERE location_code = 'CBG-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 95: Direkt Uçuş (Bodrum → Stansted)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'BJV-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '0,1,2,3,4,5,6');
+
+-- Rota 96-98: Bursa → Yenişehir Havalimanı → London City → Liverpool
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'LCY'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LCY'), (SELECT id FROM locations WHERE location_code = 'LIV-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 99: Direkt Uçuş (Bursa → London City)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'LCY'), '0,1,2,3,4,5,6');
+
+-- Rota 100-102: Adana → Adana Havalimanı → Heathrow → Stonehenge
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'ADA-CC'), (SELECT id FROM locations WHERE location_code = 'ADA-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADA-HV'), (SELECT id FROM locations WHERE location_code = 'LHR'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'STH'), '0,1,2,3,4,5,6');
+
+-- Rota 103: Direkt Uçuş (Adana → Heathrow)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'ADA-HV'), (SELECT id FROM locations WHERE location_code = 'LHR'), '0,1,2,3,4,5,6');
+
+-- Rota 104-106: Kayseri → Kayseri Havalimanı → Luton → Stratford
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'KAY-CC'), (SELECT id FROM locations WHERE location_code = 'KAY-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'KAY-HV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '1,3,5'),
+('SUBWAY', (SELECT id FROM locations WHERE location_code = 'LTN'), (SELECT id FROM locations WHERE location_code = 'STR-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 107: Direkt Uçuş (Kayseri → Luton)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'KAY-HV'), (SELECT id FROM locations WHERE location_code = 'LTN'), '0,1,2,3,4,5,6');
+
+-- Rota 108-110: Trabzon → Trabzon Havalimanı → Stansted
+
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES ('BUS', (SELECT id FROM locations WHERE location_code = 'TRA-CC'), (SELECT id FROM locations WHERE location_code = 'TRA-HV'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'TRA-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'STN'), (SELECT id FROM locations WHERE location_code = 'LON-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 111: Direkt Uçuş (Trabzon → Stansted)
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'TRA-HV'), (SELECT id FROM locations WHERE location_code = 'STN'), '0,1,2,3,4,5,6');
+
+-- Turkiye ici rotalar
+
+-- Rota 112-114: İstanbul Merkez → Sabiha Gökçen → Antalya Havalimanı → Lara Beach
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'AYT'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'ANT-LRB'), '0,1,2,3,4,5,6');
+
+-- Rota 115-117: İstanbul Merkez → Sabiha Gökçen → Bodrum Havalimanı → Bodrum Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'BJV'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'BJV'), (SELECT id FROM locations WHERE location_code = 'BJV-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 118-120: İstanbul Merkez → Sabiha Gökçen → İzmir Havalimanı → İzmir Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'ADB'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'IZM-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 121-123: İstanbul Merkez → Sabiha Gökçen → Kayseri Havalimanı → Kayseri Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'KAY-HV'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'KAY-HV'), (SELECT id FROM locations WHERE location_code = 'KAY-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 124-126: İstanbul Merkez → Sabiha Gökçen → Trabzon Havalimanı → Trabzon Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'TRA-HV'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'TRA-HV'), (SELECT id FROM locations WHERE location_code = 'TRA-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 127-129: İstanbul Merkez → Sabiha Gökçen → Gaziantep Havalimanı → Gaziantep Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'GZT-HV'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'GZT-HV'), (SELECT id FROM locations WHERE location_code = 'GZT-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 130-132: İstanbul Merkez → Sabiha Gökçen → Adnan Menderes Havalimanı → İzmir Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'ADB'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'ADB'), (SELECT id FROM locations WHERE location_code = 'IZM-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 133-135: İstanbul Merkez → Sabiha Gökçen → Esenboğa Havalimanı → Ankara Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'ESB'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'ESB'), (SELECT id FROM locations WHERE location_code = 'ANK-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 136-138: İstanbul Merkez → Sabiha Gökçen → Dalaman Havalimanı → Fethiye Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'DLM'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'DLM'), (SELECT id FROM locations WHERE location_code = 'FTH-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 139-141: İstanbul Merkez → Sabiha Gökçen → Antalya Havalimanı → Antalya Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES
+('BUS', (SELECT id FROM locations WHERE location_code = 'IST-CC'), (SELECT id FROM locations WHERE location_code = 'SAW'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'SAW'), (SELECT id FROM locations WHERE location_code = 'AYT'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'ANT-CC'), '0,1,2,3,4,5,6');
+
+-- Rota 142-144: Bursa Merkez → Yenişehir Havalimanı → Antalya Havalimanı → Lara Beach
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'AYT'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'AYT'), (SELECT id FROM locations WHERE location_code = 'ANT-LRB'), '0,1,2,3,4,5,6');
+
+-- Rota 145-147: Bursa Merkez → Yenişehir Havalimanı → Bodrum Havalimanı → Bodrum Merkez
+INSERT INTO transportations (type, origin_location_id, destination_location_id, operating_days) VALUES 
+('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5,6'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'BJV'), '1,3,5'),
+('UBER', (SELECT id FROM locations WHERE location_code = 'BJV'), (SELECT id FROM locations WHERE location_code = 'BJV-CC'), '0,1,2,3,4,5,6');

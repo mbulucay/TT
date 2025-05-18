@@ -13,12 +13,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.CollectionTable;
+import java.time.DayOfWeek;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "transportations")
@@ -35,7 +42,7 @@ public class Transportation {
     @NotNull(message = "Type is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TransportationType type;
+    private TransportationType transportationType;
     
     @NotNull(message = "Origin location is required")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -47,4 +54,25 @@ public class Transportation {
     @JoinColumn(name = "destination_location_id", nullable = false)
     private Location destinationLocation;
     
+    @Column(name = "operating_days")
+    private String operatingDays;
+
+    public List<DayOfWeek> getOperatingDaysAsList() {
+        if (operatingDays == null || operatingDays.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return Arrays.stream(operatingDays.split(","))
+                .map(DayOfWeek::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    public void setOperatingDaysFromList(List<DayOfWeek> days) {
+        if (days == null || days.isEmpty()) {
+            this.operatingDays = "";
+            return;
+        }
+        this.operatingDays = days.stream()
+                .map(DayOfWeek::name)
+                .collect(Collectors.joining(","));
+    }
 }

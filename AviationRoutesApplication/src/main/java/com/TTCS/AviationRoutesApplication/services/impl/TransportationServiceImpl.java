@@ -8,9 +8,11 @@ import com.TTCS.AviationRoutesApplication.services.TransportationService;
 import com.TTCS.AviationRoutesApplication.exceptions.TransportationNotFoundException;
 import com.TTCS.AviationRoutesApplication.enums.TransportationType;
 import com.TTCS.AviationRoutesApplication.mapper.TransportationMapper;
+import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,7 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public List<TransportationDto> getTransportationsByType(TransportationType type) {
-        return transportationRepository.findByType(type).stream()
+        return transportationRepository.findByTransportationType(type).stream()
                 .map(transportationMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -69,13 +71,16 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public TransportationDto updateTransportation(Long id, TransportationDto transportationDto) {
-        if (!transportationRepository.existsById(id)) {
-            throw new TransportationNotFoundException("Transportation not found with id: " + id);
-        }
-        Transportation transportation = transportationMapper.toEntity(transportationDto);
-        transportation.setId(id);
-        Transportation savedTransportation = transportationRepository.save(transportation);
-        return transportationMapper.toDto(savedTransportation);
+        Transportation transportation = transportationRepository.findById(id)
+            .orElseThrow(() -> new TransportationNotFoundException("Transportation not found with id: " + id));
+        
+        transportation.setTransportationType(transportationDto.getTransportationType());
+        transportation.setOriginLocation(transportationMapper.toEntity(transportationDto).getOriginLocation());
+        transportation.setDestinationLocation(transportationMapper.toEntity(transportationDto).getDestinationLocation());
+        transportation.setOperatingDaysFromList(transportationDto.getOperatingDays());
+        
+        Transportation updated = transportationRepository.save(transportation);
+        return transportationMapper.toDto(updated);
     }
 
     @Override
@@ -85,4 +90,5 @@ public class TransportationServiceImpl implements TransportationService {
         }
         transportationRepository.deleteById(id);
     }
+
 } 

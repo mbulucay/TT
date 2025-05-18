@@ -1,12 +1,11 @@
 package com.TTCS.AviationRoutesApplication.dto;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import jakarta.validation.constraints.NotNull;
 
 import com.TTCS.AviationRoutesApplication.enums.TransportationType;
-import com.TTCS.AviationRoutesApplication.model.Transportation;
+import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,11 +21,13 @@ public class TransportationDto {
     private Long id;
     
     @NotNull(message = "Type is required")
-    private TransportationType type;
+    private TransportationType transportationType;
     
     @NotNull(message = "Origin location is required")
     private LocationDto originLocation;
     
     @NotNull(message = "Destination location is required")
     private LocationDto destinationLocation;
+    
+    private List<DayOfWeek> operatingDays;
 }

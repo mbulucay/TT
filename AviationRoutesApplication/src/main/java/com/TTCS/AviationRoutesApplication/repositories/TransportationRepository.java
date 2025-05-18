@@ -11,15 +11,20 @@ import com.TTCS.AviationRoutesApplication.model.Transportation;
 
 @Repository
 public interface TransportationRepository extends JpaRepository<Transportation, Long> {
+
+    List<Transportation> findAll();
+
     
-    List<Transportation> findByType(TransportationType type);
+    
+    List<Transportation> findByTransportationType(TransportationType type);
     
     List<Transportation> findByOriginLocation(Location originLocation);
     
     List<Transportation> findByDestinationLocation(Location destinationLocation);
     
-    List<Transportation> findByOriginLocationAndDestinationLocation(
-            Location originLocation, Location destinationLocation);
+    List<Transportation> findByOriginLocationAndDestinationLocation(Location originLocation, Location destinationLocation);
+
+    
     
     // List<Transportation> findByOriginLocationCodeAndDestinationLocationCode(
     //         String originLocationCode, String destinationLocationCode);
