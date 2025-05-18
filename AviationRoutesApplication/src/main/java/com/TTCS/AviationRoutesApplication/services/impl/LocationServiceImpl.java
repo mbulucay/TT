@@ -83,11 +83,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public void deleteLocation(Long id) {
+    public boolean deleteLocation(Long id) {
         if (!locationRepository.existsById(id)) {
             throw new LocationNotFoundException("Location not found with id: " + id);
         }
         locationRepository.deleteById(id);
+        return true;
     }
 
     @Override

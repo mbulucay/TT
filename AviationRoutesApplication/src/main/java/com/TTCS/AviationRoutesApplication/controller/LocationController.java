@@ -153,10 +153,14 @@ public class LocationController {
     })
     public ResponseEntity<?> deleteLocation(@PathVariable Long id) {
         try {
-            locationService.deleteLocation(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            boolean isDeleted = locationService.deleteLocation(id);
+            if (isDeleted) {
+                return ResponseEntity.noContent().build();
+            } else {
+                return new ResponseEntity<>("Location not found", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

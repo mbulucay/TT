@@ -21,7 +21,7 @@ public interface LocationService {
     
     LocationDto updateLocation(Long id, LocationDto locationDto);
     
-    void deleteLocation(Long id);
+    boolean deleteLocation(Long id);
     
     boolean existsByLocationCode(String locationCode);
 }
