@@ -7,8 +7,9 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { FilterMatchMode } from 'primereact/api';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaChevronDown } from 'react-icons/fa';
 import { FaFilterCircleXmark } from "react-icons/fa6";
+import { TransportationServices } from "../../../api/services/tt/transportation/TransportationServices";
 
 function TransportationList() {
   const [transportations, setTransportations] = useState([]);
@@ -25,15 +26,47 @@ function TransportationList() {
   });
   const [globalFilterValue, setGlobalFilterValue] = useState('');
 
+  const showError = (message) => {
+    toastBottomCenter.current.show({
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+      life: 3000
+    });
+  };
+
+  const showSuccess = (message) => {
+    toastBottomCenter.current.show({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+      life: 3000
+    });
+  };
+
+  const handleApiError = (error) => {
+    if (error.response?.data?.message) {
+      showError(error.response.data.message);
+    } else if (error.response?.data?.errors) {
+      // Handle validation errors
+      const errorMessages = error.response.data.errors
+        .map(err => err.defaultMessage)
+        .join('\n');
+      showError(errorMessages);
+    } else {
+      showError('An unexpected error occurred');
+    }
+  };
+
   const fetchTransportations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8080/transportations");
-      setTransportations(response.data);
+      const response = await TransportationServices.getAllTransportations();
+      setTransportations(response);
       setLoading(false);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching transportations:", error);
+      handleApiError(error);
       setLoading(false);
     }
   };
@@ -46,8 +79,15 @@ function TransportationList() {
     console.log(row);
   };
 
-  const handleDeleteButtonClick = (row) => {
-    console.log(row);
+  const handleDeleteButtonClick = async (row) => {
+    try {
+      await TransportationServices.deleteTransportation(row.id);
+      showSuccess('Transportation deleted successfully');
+      fetchTransportations(); // Refresh the list
+    } catch (error) {
+      console.error("Error deleting transportation:", error);
+      handleApiError(error);
+    }
   };
 
   const onGlobalFilterChange = (e) => {
@@ -70,10 +110,11 @@ function TransportationList() {
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-between items-center">
+      <div className="flex justify-end">
         <Button 
           type="button" 
-          icon={<FaFilterCircleXmark className="mr-2" />}
+          icon={<FaFilterCircleXmark />}
+          className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded scale-75"
           label="Clear" 
           outlined 
           onClick={clearFilter} 
@@ -83,9 +124,9 @@ function TransportationList() {
           <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <InputText 
             value={globalFilterValue} 
-            onChange={onGlobalFilterChange} 
+            onChange={onGlobalFilterChange}
+            className="text-blue-900 font-bold py-2 px-4 rounded scale-75"
             placeholder="Keyword Search" 
-            className="pl-9"
           />
         </span>
       </div>
@@ -153,18 +194,28 @@ function TransportationList() {
         globalFilterFields={['transportationType', 'originLocation.name', 'destinationLocation.name']}
         header={header}
         emptyMessage="No transportation records found."
-        className="p-datatable-gridlines"
+        className="overflow-hidden"
+        stripedRows
         showGridlines
-        responsiveLayout="scroll"
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        rowsPerPageOptions={[10, 20, 50]}
+        pt={{
+          header: { className: 'border-none' },
+          thead: { className: 'bg-gray-50' },
+          tbody: { className: 'border-none' },
+          wrapper: { className: 'border rounded-lg shadow-sm' }
+        }}
         expandedRows={expandedRows}
         onRowToggle={(e) => setExpandedRows(e.data)}
         rowExpansionTemplate={rowExpansionTemplate}
         selectionMode="multiple"
         selection={selectedRows}
         onSelectionChange={(e) => setSelectedRows(e.value)}
+        expandedRowIcon={<FaChevronDown />}
+        expandedRowClassName="bg-blue-50"
+        rowClassName="hover:bg-blue-200 duration-300"
+        rowHover
+        paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+        rowsPerPageOptions={[10, 20, 50]}
       >
         <Column expander style={{ width: '3em' }} />
         <Column 

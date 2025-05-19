@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import './RouteSearch.css';
 import RouteResult from './RouteResult';
+import { LocationServices } from "../../../api/services/tt/location/LocationServices";
 
 function RouteSearch() {
     const [locations, setLocations] = useState([]);
@@ -33,8 +34,8 @@ function RouteSearch() {
 
     const fetchLocations = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/locations");
-            setLocations(response.data);
+            const response = await LocationServices.getAllLocations();
+            setLocations(response);
             
             // Get unique countries and sort alphabetically
             const uniqueCountries = [...new Set(response.data.map(loc => loc.country))]

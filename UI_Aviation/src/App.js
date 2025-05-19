@@ -32,6 +32,8 @@ import PortsMap from "./components/maritime/subdirectories/port/map/PortsMap.jsx
 import Locations from "./components/tt/locations/Locations.jsx";
 import Transportation from "./components/tt/transportation/Transportation.jsx";
 import AviationRoutes from "./components/tt/routes/AviationRoutes.jsx";
+import LocationAddForm from "./components/tt/locations/LocationAddForm.jsx";
+import TransportationAdd from "./components/tt/transportation/TransportationAdd";
 
 function App() {
 
@@ -66,8 +68,11 @@ function App() {
         <Route index={true} element={<Home />}></Route>
 
         <Route path="locations" element={<Locations />} />
+        <Route path="locations/add" element={<LocationAddForm />} />
 
         <Route path="transportations" element={<Transportation />} />
+
+        <Route path="transportations/add" element={<TransportationAdd />} />
         <Route path="routes" element={<AviationRoutes />} />
 
         {/* <Route path="admin" element={<Panel />} />
@@ -104,6 +109,7 @@ function App() {
         /> */}
 
         <Route path="info" element={<Info />} />
+        <Route path="transportation/add" element={<TransportationAdd />} />
       </Route>
 
       {/* Catch All Routes */}

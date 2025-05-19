@@ -25,14 +25,6 @@ function TopBar() {
         </span>
         <span className={`hidden md:flex no-underline text-white font-bold`}>Add</span>
       </Link>
-
-      <button
-        className={`${buttonClasses}`}
-        onClick={() => exportJsonData("transportation.json", selectedRows)}
-      >
-        <FaArrowAltCircleDown fontSize={18} />
-        <span className="hidden md:flex">Export</span>
-      </button>
     </div>
   );
 }

@@ -10,7 +10,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { FaSearch } from 'react-icons/fa';
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
+import { LocationServices } from "../../../api/services/tt/location/LocationServices";
 
 function LocationList() {
   const [locations, setLocations] = useState([]);
@@ -48,11 +48,11 @@ function LocationList() {
   const fetchLocations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8080/locations");
-      setLocations(response.data);
+      const response = await LocationServices.getAllLocations();
+      console.log(response);
+      setLocations(response);
       setLoading(false);
 
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching locations:", error);
       setLoading(false);
