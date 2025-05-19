@@ -31,6 +31,8 @@ import Info from "./components/shared/app_pages/Info.jsx";
 import PortsMap from "./components/maritime/subdirectories/port/map/PortsMap.jsx";
 import Locations from "./components/tt/locations/Locations.jsx";
 import Transportation from "./components/tt/transportation/Transportation.jsx";
+import AviationRoutes from "./components/tt/routes/AviationRoutes.jsx";
+
 function App() {
 
 
@@ -66,6 +68,7 @@ function App() {
         <Route path="locations" element={<Locations />} />
 
         <Route path="transportations" element={<Transportation />} />
+        <Route path="routes" element={<AviationRoutes />} />
 
         {/* <Route path="admin" element={<Panel />} />
 

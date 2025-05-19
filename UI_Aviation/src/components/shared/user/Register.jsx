@@ -5,7 +5,6 @@ import { RiLoginBoxLine, RiLoginBoxFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../../api/auth/auth";
 import { Toast } from "primereact/toast";
-// import HavelsanStar from "../../../assets/icon/havelsan_star.svg";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -98,12 +97,10 @@ function Register() {
       <Toast ref={register_error_toast} position="bottom-center" />
       {/* <div className="w-full h-full flex items-center justify-center gap-x-44 z-20"></div> */}
       <div className="fixed w-full h-full bg-white/10 flex items-center justify-center gap-x-44 z-30"></div>
-      <div className="fixed w-screen h-screen flex items-center bg-havelsan-bg justify-center gap-x-44  z-20"></div>
       <div className="fixed w-full h-full px-4 flex items-center justify-center gap-x-44 bg-blue-900 z-10">
         <div className="flex items-center justify-center">
           <div className="mx-9 p-8 rounded-3xl hover:scale-105 bg-blue-600 flex align-items-center gap-2">
             <Button
-              label={<div className="">HAVELSAN</div>}
               onClick={() => setVisible(true)}
               className="text-white"
             />{" "}
@@ -124,7 +121,6 @@ function Register() {
                   translate-x-24 -translate-y-24 hover:rotate-180 duration-1000 hover:scale-150"
                 >
                   {/* <GiShipWheel fontSize={96} color="white" /> */}
-                  {/* <img src={HavelsanStar} alt="React Logo" /> */}
                 </div>
 
                 {/* <div className="flex justify-center"></div> */}

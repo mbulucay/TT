@@ -17,18 +17,11 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   //   icon: <MdDashboard color="white" />,
   //   subdirector: [],
   // },
-{
-  key: "Locations",
-  label: "Locations",
-  path: "/locations",
-  icon: <FaMapLocationDot color="white" />,
-  subdirector: [],
-},
   {
-    key: "Routes",
-    label: "Routes",
-    path: "/routes",
-    icon: <TbRoute2 color="white" />,
+    key: "Locations",
+    label: "Locations",
+    path: "/locations",
+    icon: <FaMapLocationDot color="white" />,
     subdirector: [],
   },
   {
@@ -36,6 +29,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
     label: "Transportations",
     path: "/transportations",
     icon: <FaRoute color="white" />,
+    subdirector: [],
+  },  
+  {
+    key: "Routes",
+    label: "Routes",
+    path: "/routes",
+    icon: <TbRoute2 color="white" />,
     subdirector: [],
   },
   // {

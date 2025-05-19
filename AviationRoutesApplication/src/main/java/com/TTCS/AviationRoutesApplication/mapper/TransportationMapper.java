@@ -72,6 +72,19 @@ public class TransportationMapper implements Mapper<Transportation, Transportati
         };
     }
 
+    private Integer mapDayOfWeekToNumber(DayOfWeek day) {
+        return switch (day) {
+            case SUNDAY -> 0;
+            case MONDAY -> 1;
+            case TUESDAY -> 2;
+            case WEDNESDAY -> 3;
+            case THURSDAY -> 4;
+            case FRIDAY -> 5;
+            case SATURDAY -> 6;
+            default -> throw new IllegalArgumentException("Invalid day of week: " + day);
+        };
+    }
+
     private String convertDayOfWeekListToString(List<DayOfWeek> days) {
         if (days == null || days.isEmpty()) {
             return "";

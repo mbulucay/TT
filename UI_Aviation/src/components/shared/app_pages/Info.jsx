@@ -73,7 +73,6 @@ function Info() {
         <div className="flex justify-center items-center gap-2 bg-white p-2 rounded-lg">
           <BsCcCircleFill />
           {/* <div className="font-thin text-center">
-            Developed By <span className="font-bold">Havelsan</span>
           </div> */}
         </div>
       </div>

@@ -26,9 +26,18 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "transportations")
+@Table(name = "transportations",
+       uniqueConstraints = {
+           @UniqueConstraint(columnNames = {
+               "transportation_type",
+               "origin_location_id",
+               "destination_location_id",
+               "operating_days"
+           })
+       })
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,7 +50,7 @@ public class Transportation {
     
     @NotNull(message = "Type is required")
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "transportation_type", nullable = false)
     private TransportationType transportationType;
     
     @NotNull(message = "Origin location is required")

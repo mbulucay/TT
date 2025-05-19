@@ -48,12 +48,4 @@ public class Location {
     @Size(min = 2, max = 10, message = "Location code must be between 2 and 10 characters")
     @Column(name = "location_code", nullable = false, unique = true)
     private String locationCode;
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "originLocation", cascade = CascadeType.ALL)
-    private List<Transportation> departureTransportations = new ArrayList<>();
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "destinationLocation", cascade = CascadeType.ALL)
-    private List<Transportation> arrivalTransportations = new ArrayList<>();
 }

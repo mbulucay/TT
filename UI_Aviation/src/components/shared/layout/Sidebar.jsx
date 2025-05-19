@@ -44,14 +44,14 @@ export default function Sidebar() {
     <div className={`bg-blue-950 ${sidebarWidth} p-3 flex flex-col text-white`}>
       <div className="flex items-center gap-4 px-2 py-3">
         <Link to={"/"} key="logo">
-          <img src={require("../../../assets/icon/logo.png")} alt="logo" />
+          {/* <img src={require("../../../assets/icon/logo.png")} alt="logo" /> */}
         </Link>
         <Link to={"/"} className="no-underline" key="app_name">
           <span
             className={`hidden md:flex font-sans font-bold text-3xl hover:text-4xl duration-200 
                 hover:underline text-transparent bg-gradient-to-r bg-clip-text from-white to-blue-600 tracking-wide`}
           >
-            BLUE <br /> BOOK
+            Route <br /> BOOK
           </span>
         </Link>
       </div>

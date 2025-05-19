@@ -11,6 +11,7 @@ import com.TTCS.AviationRoutesApplication.mapper.TransportationMapper;
 import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,14 +46,6 @@ public class TransportationServiceImpl implements TransportationService {
                 .map(transportationMapper::toDto)
                 .collect(Collectors.toList());
     }
-
-    // @Override
-    // public List<TransportationDto> getTransportationsByOriginAndDestination(
-    //         String originLocationCode, String destinationLocationCode){
-    //     return transportationRepository.findByOriginLocationCodeAndDestinationLocationCode(originLocationCode, destinationLocationCode).stream()
-    //             .map(transportationMapper::toDto)
-    //             .collect(Collectors.toList());
-    // }
 
     @Override
     public List<TransportationDto> getTransportationsByOriginAndDestination(
@@ -89,6 +82,14 @@ public class TransportationServiceImpl implements TransportationService {
             throw new TransportationNotFoundException("Transportation not found with id: " + id);
         }
         transportationRepository.deleteById(id);
+    }
+
+    public Transportation saveTransportation(Transportation transportation) {
+        try {
+            return transportationRepository.save(transportation);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("A transportation with these details already exists");
+        }
     }
 
 } 

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthService } from "../../../api/auth/auth";
 import { Toast } from "primereact/toast";
 import { useLocation } from "react-router-dom";
-// import HavelsanStar from "../../../assets/icon/havelsan_star.svg";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -84,7 +83,6 @@ function Login() {
       <Toast ref={login_error_toast} position="bottom-center" />
       {/* <div className="fixed w-full h-full bg-blue-800/50 flex items-center justify-center gap-x-44 z-30"></div> */}
       <div className="fixed w-full h-full bg-white/10 flex items-center justify-center gap-x-44 z-30"></div>
-      <div className="fixed w-screen h-screen flex items-center bg-havelsan-bg justify-center gap-x-44  z-20"></div>
       <div className="fixed w-full h-full px-4 flex items-center justify-center gap-x-44 bg-blue-900 z-10">
         {/* <div className="rotate-12">
           <MdOutlineMenuBook color="white" fontSize={"600"} />
@@ -93,7 +91,6 @@ function Login() {
         <div className="flex items-center justify-center">
           <div className="mx-9 p-8 rounded-3xl hover:scale-105 bg-blue-600 flex align-items-center gap-2">
             <Button
-              // label={<div className="">HAVELSAN</div>}
               onClick={() => setVisible(true)}
               className="text-white"
             />{" "}
@@ -116,7 +113,6 @@ function Login() {
                   translate-x-24 -translate-y-24 hover:rotate-180 duration-1000 hover:scale-150 "
                 >
                   {/* <GiShipWheel  fontSize={96} color="#E1F7F5" /> */}
-                  {/* <img src={HavelsanStar} alt="React Logo" /> */}
                 </div>
 
                 <div className="flex flex-column place-items-center w-10/12 md:w-full px-8 gap-4 bg-black/65 rounded-2xl ring-1 py-4 ring-white">

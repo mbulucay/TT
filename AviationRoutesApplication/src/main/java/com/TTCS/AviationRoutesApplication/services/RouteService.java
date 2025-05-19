@@ -8,13 +8,14 @@ import com.TTCS.AviationRoutesApplication.dto.request.RouteRequestDto;
 import com.TTCS.AviationRoutesApplication.dto.response.RouteResponseDto;
 
 public interface RouteService {
+
+    List<RouteResponseDto> getRoutesByOriginAndDestination(RouteRequestDto routeRequestDto);
     
-    List<RouteDto> getAllRoutes();
-    
-    RouteDto getRouteById(Long id);
-    
-    List<RouteDto> getRoutesByOriginAndDestination(
+    List<RouteResponseDto> getRoutesByOriginAndDestination(
             String originLocationCode, String destinationLocationCode);
+
+    List<RouteResponseDto> getRoutesByOriginAndDestination(
+            Long originLocationId, Long destinationLocationId);
     
     List<RouteResponseDto> findRoutes(RouteRequestDto routeRequestDto);
     
@@ -22,5 +23,5 @@ public interface RouteService {
     
     RouteDto updateRoute(Long id, RouteDto routeDto);
     
-    void deleteRoute(Long id);
+    boolean deleteRoute(Long id);
 }

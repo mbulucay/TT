@@ -29,10 +29,12 @@ module.exports = {
       backgroundImage: {
         'login-bg': "url('./assets/img/loginbg.png')",
         'login2-bg': "url('./assets/img/loginbg2.png')",
-        'havelsan-bg': "url('./assets/img/havelsan-bg.png')",
 
       }
     },
   },
   plugins: [require("flowbite/plugin")],
+  corePlugins: {
+    preflight: false,
+  },
 };

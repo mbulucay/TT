@@ -1,6 +1,5 @@
 package com.TTCS.AviationRoutesApplication.dto;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.TTCS.AviationRoutesApplication.model.Route;
 
 @Data
 @NoArgsConstructor

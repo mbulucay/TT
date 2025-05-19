@@ -1,10 +1,8 @@
 package com.TTCS.AviationRoutesApplication.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,41 +41,59 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @GetMapping
-    @Operation(summary = "Get all routes", description = "Returns a list of all routes")
-    @ApiResponse(responseCode = "200", description = "Successfully retrieved routes")
-    public ResponseEntity<List<RouteDto>> getAllRoutes() {
-        List<RouteDto> routes = routeService.getAllRoutes();
-        return ResponseEntity.ok(routes);
-    }
+    // @GetMapping
+    // @Operation(summary = "Get all routes", description = "Returns a list of all routes")
+    // @ApiResponse(responseCode = "200", description = "Successfully retrieved routes")
+    // public ResponseEntity<List<RouteDto>> getAllRoutes() {
+    //     List<RouteDto> routes = routeService.getAllRoutes();
+    //     return ResponseEntity.ok(routes);
+    // }
     
-    @GetMapping("/{id}")
-    @Operation(summary = "Get route by ID", description = "Returns a route by ID")
+    // @GetMapping("/{id}")
+    // @Operation(summary = "Get route by ID", description = "Returns a route by ID")
+    // @ApiResponses(value = {
+    //         @ApiResponse(responseCode = "200", description = "Successfully retrieved route"),
+    //         @ApiResponse(responseCode = "404", description = "Route not found")
+    // })
+    // public ResponseEntity<?> getRouteById(@PathVariable Long id) {
+    //     try {
+    //         RouteDto route = routeService.getRouteById(id);
+    //         return ResponseEntity.ok(route);
+    //     } catch (EntityNotFoundException e) {
+    //         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    //     }
+    // }
+    
+    @GetMapping("/api/search")
+    @Operation(summary = "Search routes", description = "Search routes by origin and destination using either location codes or location IDs")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved route"),
-            @ApiResponse(responseCode = "404", description = "Route not found")
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved routes"),
+        @ApiResponse(responseCode = "400", description = "Invalid parameters provided")
     })
-    public ResponseEntity<?> getRouteById(@PathVariable Long id) {
-        try {
-            RouteDto route = routeService.getRouteById(id);
-            return ResponseEntity.ok(route);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<RouteResponseDto>> searchRoutes(
+            @RequestParam(required = false) String originLocationCode,
+            @RequestParam(required = false) String destinationLocationCode,
+            @RequestParam(required = false) Long originLocationId,
+            @RequestParam(required = false) Long destinationLocationId) {
+        
+        // If location codes are provided, use them
+        if (originLocationCode != null && destinationLocationCode != null) {
+            List<RouteResponseDto> routes = routeService.getRoutesByOriginAndDestination(
+                    originLocationCode, destinationLocationCode);
+            return ResponseEntity.ok(routes);
         }
-    }
-    
-    @GetMapping("/search")
-    @Operation(summary = "Search routes", description = "Search routes by origin and destination")
-    @ApiResponse(responseCode = "200", description = "Successfully retrieved routes")
-    public ResponseEntity<List<RouteDto>> searchRoutes(
-            @RequestParam String originLocationCode,
-            @RequestParam String destinationLocationCode) {
         
-        List<RouteDto> routes = routeService.getRoutesByOriginAndDestination(
-                originLocationCode, destinationLocationCode);
+        // If location IDs are provided, use them
+        if (originLocationId != null && destinationLocationId != null) {
+            List<RouteResponseDto> routes = routeService.getRoutesByOriginAndDestination(
+                    originLocationId, destinationLocationId);
+            return ResponseEntity.ok(routes);
+        }
         
-        return ResponseEntity.ok(routes);
+        // If neither complete set of parameters is provided, return bad request
+        return ResponseEntity.badRequest().build();
     }
+
     @PostMapping("/find")
     @Operation(summary = "Find routes by criteria", description = "Find routes matching the specified criteria")
     @ApiResponse(responseCode = "200", description = "Successfully found routes")

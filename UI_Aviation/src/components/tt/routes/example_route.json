@@ -1,0 +1,386 @@
+[
+    {
+      "id": 1,
+      "originLocation": {
+        "id": 40,
+        "name": "Taksim Square",
+        "city": "Istanbul",
+        "country": "Turkey",
+        "locationCode": "IST-TAK"
+      },
+      "destinationLocation": {
+        "id": 190,
+        "name": "Westminster",
+        "city": "London",
+        "country": "United Kingdom",
+        "locationCode": "LON-WST"
+      },
+      "transportations": [
+        {
+          "id": 1,
+          "transportationType": "UBER",
+          "originLocation": {
+            "id": 40,
+            "name": "Taksim Square",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-TAK"
+          },
+          "destinationLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        },
+        {
+          "id": 2,
+          "transportationType": "FLIGHT",
+          "originLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "destinationLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "operatingDays": [
+            "MONDAY",
+            "WEDNESDAY",
+            "FRIDAY"
+          ]
+        },
+        {
+          "id": 3,
+          "transportationType": "BUS",
+          "originLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "destinationLocation": {
+            "id": 190,
+            "name": "Westminster",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LON-WST"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "originLocation": {
+        "id": 40,
+        "name": "Taksim Square",
+        "city": "Istanbul",
+        "country": "Turkey",
+        "locationCode": "IST-TAK"
+      },
+      "destinationLocation": {
+        "id": 190,
+        "name": "Westminster",
+        "city": "London",
+        "country": "United Kingdom",
+        "locationCode": "LON-WST"
+      },
+      "transportations": [
+        {
+          "id": 61,
+          "transportationType": "UBER",
+          "originLocation": {
+            "id": 40,
+            "name": "Taksim Square",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-TAK"
+          },
+          "destinationLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        },
+        {
+          "id": 2,
+          "transportationType": "FLIGHT",
+          "originLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "destinationLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "operatingDays": [
+            "MONDAY",
+            "WEDNESDAY",
+            "FRIDAY"
+          ]
+        },
+        {
+          "id": 3,
+          "transportationType": "BUS",
+          "originLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "destinationLocation": {
+            "id": 190,
+            "name": "Westminster",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LON-WST"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "originLocation": {
+        "id": 40,
+        "name": "Taksim Square",
+        "city": "Istanbul",
+        "country": "Turkey",
+        "locationCode": "IST-TAK"
+      },
+      "destinationLocation": {
+        "id": 190,
+        "name": "Westminster",
+        "city": "London",
+        "country": "United Kingdom",
+        "locationCode": "LON-WST"
+      },
+      "transportations": [
+        {
+          "id": 1,
+          "transportationType": "UBER",
+          "originLocation": {
+            "id": 40,
+            "name": "Taksim Square",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-TAK"
+          },
+          "destinationLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        },
+        {
+          "id": 17,
+          "transportationType": "FLIGHT",
+          "originLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "destinationLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "operatingDays": [
+            "MONDAY",
+            "WEDNESDAY",
+            "FRIDAY"
+          ]
+        },
+        {
+          "id": 3,
+          "transportationType": "BUS",
+          "originLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "destinationLocation": {
+            "id": 190,
+            "name": "Westminster",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LON-WST"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "originLocation": {
+        "id": 40,
+        "name": "Taksim Square",
+        "city": "Istanbul",
+        "country": "Turkey",
+        "locationCode": "IST-TAK"
+      },
+      "destinationLocation": {
+        "id": 190,
+        "name": "Westminster",
+        "city": "London",
+        "country": "United Kingdom",
+        "locationCode": "LON-WST"
+      },
+      "transportations": [
+        {
+          "id": 61,
+          "transportationType": "UBER",
+          "originLocation": {
+            "id": 40,
+            "name": "Taksim Square",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-TAK"
+          },
+          "destinationLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        },
+        {
+          "id": 17,
+          "transportationType": "FLIGHT",
+          "originLocation": {
+            "id": 38,
+            "name": "Istanbul Airport",
+            "city": "Istanbul",
+            "country": "Turkey",
+            "locationCode": "IST-AP"
+          },
+          "destinationLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "operatingDays": [
+            "MONDAY",
+            "WEDNESDAY",
+            "FRIDAY"
+          ]
+        },
+        {
+          "id": 3,
+          "transportationType": "BUS",
+          "originLocation": {
+            "id": 184,
+            "name": "Heathrow Airport",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LHR"
+          },
+          "destinationLocation": {
+            "id": 190,
+            "name": "Westminster",
+            "city": "London",
+            "country": "United Kingdom",
+            "locationCode": "LON-WST"
+          },
+          "operatingDays": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        }
+      ]
+    }
+  ]

@@ -9,6 +9,8 @@ import { Button } from 'primereact/button';
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { FaSearch } from 'react-icons/fa';
 import { FaFilterCircleXmark } from "react-icons/fa6";
+import { FaChevronDown } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 
 function LocationList() {
   const [locations, setLocations] = useState([]);
@@ -28,8 +30,14 @@ function LocationList() {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     country: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    code: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+    city: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    locationCode: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    address: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    state: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    postalCode: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    timezone: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    coordinates: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    type: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
   });
   const [globalFilterValue, setGlobalFilterValue] = useState('');
 
@@ -77,18 +85,25 @@ function LocationList() {
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
       country: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-      type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-      code: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
+      city: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      locationCode: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      address: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      state: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      postalCode: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      timezone: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      coordinates: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      type: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
     });
     setGlobalFilterValue('');
   };
 
   const renderHeader = () => {
     return (
-      <div className="flex justify-between items-center">
+      <div className="flex justify-end">
         <Button 
           type="button" 
-          icon={<FaFilterCircleXmark className="mr-2" />}
+          icon={<FaFilterCircleXmark />}
+          className="mr-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded scale-75"
           label="Clear" 
           outlined 
           onClick={clearFilter} 
@@ -98,9 +113,9 @@ function LocationList() {
           <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <InputText 
             value={globalFilterValue} 
-            onChange={onGlobalFilterChange} 
+            onChange={onGlobalFilterChange}
+            className="text-blue-900 font-bold py-2 px-4 rounded scale-75"
             placeholder="Keyword Search" 
-            className="pl-9"
           />
         </span>
       </div>
@@ -153,24 +168,40 @@ function LocationList() {
   return (
     <div className="card bg-blue-100 rounded-b-3xl z-1 shadow-blue-950 shadow-2xl z-2 p-4">
       <Toast ref={toastBottomCenter} position="bottom-center" />
-
       <DataTable
         value={locations}
         paginator
         rows={10}
+        rowsPerPageOptions={[10, 20, 50]}
+        paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
         dataKey="id"
         filters={filters}
         filterDisplay="menu"
         loading={loading}
-        globalFilterFields={['name', 'country', 'type', 'code']}
+        globalFilterFields={[
+          'name',
+          'country',
+          'city',
+          'locationCode',
+          'address',
+          'state',
+          'postalCode',
+          'timezone',
+          'coordinates',
+          'type'
+        ]}
         header={header}
         emptyMessage="No locations found."
-        className="p-datatable-gridlines"
+        className="overflow-hidden"
+        stripedRows
         showGridlines
-        responsiveLayout="scroll"
-        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        rowsPerPageOptions={[10, 20, 50]}
+        pt={{
+          header: { className: 'border-none' },
+          thead: { className: 'bg-gray-50' },
+          tbody: { className: 'border-none' },
+          wrapper: { className: 'border rounded-lg shadow-sm' }
+        }}
         expandedRows={expandedRows}
         onRowExpand={onRowExpand}
         onRowToggle={(e) => setExpandedRows(e.data)}
@@ -178,6 +209,10 @@ function LocationList() {
         selectionMode="multiple"
         selection={selectedRows}
         onSelectionChange={(e) => setSelectedRows(e.value)}
+        expandedRowIcon={<FaChevronDown />}
+        expandedRowClassName="bg-blue-50"
+        rowClassName="hover:bg-blue-200 duration-300"
+        rowHover
       >
         <Column expander style={{ width: '3em' }} />
         <Column 
@@ -208,6 +243,8 @@ function LocationList() {
           field="locationCode" 
           header="Location Code" 
           sortable 
+          filter 
+          filterPlaceholder="Search by location code"
           style={{ minWidth: '150px' }}
         />
         <Column 
