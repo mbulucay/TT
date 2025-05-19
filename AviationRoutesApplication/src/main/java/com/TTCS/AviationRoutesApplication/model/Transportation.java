@@ -66,22 +66,4 @@ public class Transportation {
     @Column(name = "operating_days")
     private String operatingDays;
 
-    public List<DayOfWeek> getOperatingDaysAsList() {
-        if (operatingDays == null || operatingDays.isEmpty()) {
-            return new ArrayList<>();
-        }
-        return Arrays.stream(operatingDays.split(","))
-                .map(DayOfWeek::valueOf)
-                .collect(Collectors.toList());
-    }
-
-    public void setOperatingDaysFromList(List<DayOfWeek> days) {
-        if (days == null || days.isEmpty()) {
-            this.operatingDays = "";
-            return;
-        }
-        this.operatingDays = days.stream()
-                .map(DayOfWeek::name)
-                .collect(Collectors.joining(","));
-    }
 }

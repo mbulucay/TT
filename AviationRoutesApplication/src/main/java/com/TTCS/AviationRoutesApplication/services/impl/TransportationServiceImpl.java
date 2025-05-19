@@ -57,8 +57,18 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public TransportationDto createTransportation(TransportationDto transportationDto) {
+        System.out.println(transportationDto.getOriginLocation());
+        System.out.println(transportationDto.getDestinationLocation());
+        System.out.println(transportationDto.getOperatingDays());
+        System.out.println(transportationDto.getTransportationType());
+        System.out.println(transportationDto.getId());
+        
         Transportation transportation = transportationMapper.toEntity(transportationDto);
+        System.out.println("lak;skas;lkdas;lkdsa");
+
         Transportation savedTransportation = transportationRepository.save(transportation);
+        System.out.println("lak;skas;lkdas;lkdsa");
+
         return transportationMapper.toDto(savedTransportation);
     }
 

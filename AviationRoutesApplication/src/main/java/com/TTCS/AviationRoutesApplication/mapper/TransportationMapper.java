@@ -90,7 +90,8 @@ public class TransportationMapper implements Mapper<Transportation, Transportati
             return "";
         }
         return days.stream()
-                .map(DayOfWeek::name)
+                .map(this::mapDayOfWeekToNumber)
+                .map(String::valueOf)
                 .collect(Collectors.joining(","));
     }
 } 

@@ -64,11 +64,11 @@ function TransportationAdd() {
     setLoading(true);
 
     try {
-    
       const submissionData = {
-        ...formData,
-        operatingDays: formData.operatingDays.join(',').toString(),
-
+        transportationType: formData.transportationType,
+        originLocation: formData.originLocation,
+        destinationLocation: formData.destinationLocation,
+        operatingDays: formData.operatingDays
       };
       console.log(submissionData);
       await TransportationServices.createTransportation(submissionData);
