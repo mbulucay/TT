@@ -11,6 +11,8 @@ import { FaSearch } from 'react-icons/fa';
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { FaChevronDown } from "react-icons/fa";
 import { LocationServices } from "../../../api/services/tt/location/LocationServices";
+import LocationEdit from './LocationEdit';
+import LocationDelete from './LocationDelete';
 
 function LocationList() {
   const [locations, setLocations] = useState([]);
@@ -18,6 +20,10 @@ function LocationList() {
   const toastBottomCenter = useRef(null);
   const [expandedRows, setExpandedRows] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [editingLocation, setEditingLocation] = useState(null);
+  const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
+  const [deletingLocation, setDeletingLocation] = useState(null);
+  const [isDeleteDialogVisible, setIsDeleteDialogVisible] = useState(false);
 
   const [filter, setFilter] = useState({
     name: "",
@@ -64,11 +70,15 @@ function LocationList() {
   }, []);
 
   const handleEditButtonClick = (row) => {
-    console.log(row);
+    console.log('Editing location:', row);
+    setEditingLocation({...row});
+    setIsEditDialogVisible(true);
   };
 
   const handleDeleteButtonClick = (row) => {
-    console.log(row);
+    console.log('Deleting location:', row);
+    setDeletingLocation(row);
+    setIsDeleteDialogVisible(true);
   };
 
   const onGlobalFilterChange = (e) => {
@@ -165,9 +175,79 @@ function LocationList() {
     );
   };
 
+  const handleLocationUpdate = async (updatedLocation) => {
+    try {
+      await LocationServices.updateLocation(updatedLocation.id, updatedLocation);
+      
+      // Update the locations list with the new data
+      setLocations(locations.map(loc => 
+        loc.id === updatedLocation.id ? updatedLocation : loc
+      ));
+      
+      toastBottomCenter.current.show({
+        severity: "success",
+        summary: "Success",
+        detail: "Location updated successfully",
+        life: 3000,
+      });
+    } catch (error) {
+      console.error('Error updating location:', error);
+      toastBottomCenter.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to update location",
+        life: 3000,
+      });
+    }
+  };
+
+  const handleLocationDelete = async (deletedLocationId) => {
+    try {
+      // Update the locations list by filtering out the deleted location
+      setLocations(locations.filter(loc => loc.id !== deletedLocationId));
+      
+      toastBottomCenter.current.show({
+        severity: "success",
+        summary: "Success",
+        detail: "Location deleted successfully",
+        life: 3000,
+      });
+    } catch (error) {
+      console.error('Error deleting location:', error);
+      toastBottomCenter.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to delete location",
+        life: 3000,
+      });
+    }
+  };
+
   return (
     <div className="card bg-blue-100 rounded-b-3xl z-1 shadow-blue-950 shadow-2xl z-2 p-4">
       <Toast ref={toastBottomCenter} position="bottom-center" />
+      {editingLocation && (
+        <LocationEdit
+          visible={isEditDialogVisible}
+          onHide={() => {
+            setIsEditDialogVisible(false);
+            setEditingLocation(null);
+          }}
+          location={editingLocation}
+          onUpdate={handleLocationUpdate}
+        />
+      )}
+      {deletingLocation && (
+        <LocationDelete
+          visible={isDeleteDialogVisible}
+          onHide={() => {
+            setIsDeleteDialogVisible(false);
+            setDeletingLocation(null);
+          }}
+          location={deletingLocation}
+          onDelete={handleLocationDelete}
+        />
+      )}
       <DataTable
         value={locations}
         paginator
