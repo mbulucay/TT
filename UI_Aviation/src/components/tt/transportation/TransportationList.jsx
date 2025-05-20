@@ -10,6 +10,7 @@ import { FilterMatchMode } from 'primereact/api';
 import { FaSearch, FaChevronDown } from 'react-icons/fa';
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { TransportationServices } from "../../../api/services/tt/transportation/TransportationServices";
+import TransportationEdit from './TransportationEdit';
 
 function TransportationList() {
   const [transportations, setTransportations] = useState([]);
@@ -17,6 +18,8 @@ function TransportationList() {
   const toastBottomCenter = useRef(null);
   const [expandedRows, setExpandedRows] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [editingTransportation, setEditingTransportation] = useState(null);
+  const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -76,7 +79,8 @@ function TransportationList() {
   }, []);
 
   const handleEditButtonClick = (row) => {
-    console.log(row);
+    setEditingTransportation(row);
+    setIsEditDialogVisible(true);
   };
 
   const handleDeleteButtonClick = async (row) => {
@@ -86,6 +90,25 @@ function TransportationList() {
       fetchTransportations(); // Refresh the list
     } catch (error) {
       console.error("Error deleting transportation:", error);
+      handleApiError(error);
+    }
+  };
+
+  const handleTransportationUpdate = async (updatedTransportation) => {
+    try {
+      await TransportationServices.updateTransportation(
+        updatedTransportation.id, 
+        updatedTransportation
+      );
+      
+      // Update the transportations list with the new data
+      setTransportations(transportations.map(trans => 
+        trans.id === updatedTransportation.id ? updatedTransportation : trans
+      ));
+      
+      showSuccess("Transportation updated successfully");
+    } catch (error) {
+      console.error('Error updating transportation:', error);
       handleApiError(error);
     }
   };
@@ -182,6 +205,18 @@ function TransportationList() {
   return (
     <div className="card bg-blue-100 rounded-b-3xl z-1 shadow-blue-950 shadow-2xl z-2 p-4">
       <Toast ref={toastBottomCenter} position="bottom-center" />
+
+      {editingTransportation && (
+        <TransportationEdit
+          visible={isEditDialogVisible}
+          onHide={() => {
+            setIsEditDialogVisible(false);
+            setEditingTransportation(null);
+          }}
+          transportation={editingTransportation}
+          onUpdate={handleTransportationUpdate}
+        />
+      )}
 
       <DataTable
         value={transportations}

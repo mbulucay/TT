@@ -18,15 +18,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.CollectionTable;
-import java.time.DayOfWeek;
-import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 import jakarta.persistence.UniqueConstraint;
+import java.util.List;
+import java.time.DayOfWeek;
 
 @Entity
 @Table(name = "transportations",

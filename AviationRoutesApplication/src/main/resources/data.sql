@@ -612,7 +612,7 @@ INSERT INTO transportations (transportation_type, origin_location_id, destinatio
 
 -- Rota 28-30: Bursa → YEI → LHR → Buckingham Palace
 INSERT INTO transportations (transportation_type, origin_location_id, destination_location_id, operating_days) VALUES 
-('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5'),
+-- ('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5'),
 ('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'LHR'), '1,3,5'),
 ('UBER', (SELECT id FROM locations WHERE location_code = 'LHR'), (SELECT id FROM locations WHERE location_code = 'LON-BKP'), '0,1,2,3,4,5,6');
 

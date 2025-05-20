@@ -8,7 +8,7 @@ import com.TTCS.AviationRoutesApplication.services.TransportationService;
 import com.TTCS.AviationRoutesApplication.exceptions.TransportationNotFoundException;
 import com.TTCS.AviationRoutesApplication.enums.TransportationType;
 import com.TTCS.AviationRoutesApplication.mapper.TransportationMapper;
-import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
+import com.TTCS.AviationRoutesApplication.mapper.enums.DayOfWeekMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -57,17 +57,9 @@ public class TransportationServiceImpl implements TransportationService {
 
     @Override
     public TransportationDto createTransportation(TransportationDto transportationDto) {
-        System.out.println(transportationDto.getOriginLocation());
-        System.out.println(transportationDto.getDestinationLocation());
-        System.out.println(transportationDto.getOperatingDays());
-        System.out.println(transportationDto.getTransportationType());
-        System.out.println(transportationDto.getId());
-        
-        Transportation transportation = transportationMapper.toEntity(transportationDto);
-        System.out.println("lak;skas;lkdas;lkdsa");
 
+        Transportation transportation = transportationMapper.toEntity(transportationDto);
         Transportation savedTransportation = transportationRepository.save(transportation);
-        System.out.println("lak;skas;lkdas;lkdsa");
 
         return transportationMapper.toDto(savedTransportation);
     }
@@ -80,7 +72,7 @@ public class TransportationServiceImpl implements TransportationService {
         transportation.setTransportationType(transportationDto.getTransportationType());
         transportation.setOriginLocation(transportationMapper.toEntity(transportationDto).getOriginLocation());
         transportation.setDestinationLocation(transportationMapper.toEntity(transportationDto).getDestinationLocation());
-        transportation.setOperatingDaysFromList(transportationDto.getOperatingDays());
+        transportation.setOperatingDays(DayOfWeekMapper.convertDayOfWeekListToString(transportationDto.getOperatingDays()));
         
         Transportation updated = transportationRepository.save(transportation);
         return transportationMapper.toDto(updated);

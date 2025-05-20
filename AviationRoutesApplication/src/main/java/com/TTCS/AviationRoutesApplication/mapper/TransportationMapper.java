@@ -6,9 +6,6 @@ import com.TTCS.AviationRoutesApplication.mapper.enums.DayOfWeekMapper;
 import org.springframework.stereotype.Component;
 import com.TTCS.AviationRoutesApplication.mapper.interfaces.Mapper;
 
-import java.time.DayOfWeek;
-import java.util.List;
-
 @Component
 public class TransportationMapper implements Mapper<Transportation, TransportationDto> {
     

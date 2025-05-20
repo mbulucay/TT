@@ -18,6 +18,17 @@ function LocationEdit({ visible, onHide, location, onUpdate }) {
     return null;
   }
 
+  const showError = (message) => {
+    if (toast.current) {
+      toast.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: message,
+        life: 3000,
+      });
+    }
+  };
+
   const handleInputChange = (field, value) => {
     setFormData({
       ...formData,
@@ -27,6 +38,11 @@ function LocationEdit({ visible, onHide, location, onUpdate }) {
 
   const updateTrigger = async (event) => {
     try {
+      if (!formData.name || !formData.locationCode || !formData.country || !formData.city) {
+        showError("All fields are required");
+        return;
+      }
+
       await LocationServices.updateLocation(formData.id, formData);
       onUpdate(formData);
       onHide();
