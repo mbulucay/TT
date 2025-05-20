@@ -621,3 +621,10 @@ INSERT INTO transportations (transportation_type, origin_location_id, destinatio
 ('UBER', (SELECT id FROM locations WHERE location_code = 'NEV-CAP'), (SELECT id FROM locations WHERE location_code = 'NAV'), '0,1,2,3,4,5,6'),
 ('FLIGHT', (SELECT id FROM locations WHERE location_code = 'NAV'), (SELECT id FROM locations WHERE location_code = 'JFK'), '2,4,6'),
 ('SUBWAY', (SELECT id FROM locations WHERE location_code = 'JFK'), (SELECT id FROM locations WHERE location_code = 'NYC-CPK'), '0,1,2,3,4,5,6');
+
+-- Rota 34-36: Bursa City Center → ESB → MIA → Wynwood Walls
+INSERT INTO transportations (transportation_type, origin_location_id, destination_location_id, operating_days) VALUES 
+-- ('BUS', (SELECT id FROM locations WHERE location_code = 'BRS-CC'), (SELECT id FROM locations WHERE location_code = 'YEI'), '0,1,2,3,4,5'),
+('FLIGHT', (SELECT id FROM locations WHERE location_code = 'YEI'), (SELECT id FROM locations WHERE location_code = 'ESB'), '1,3,5');
+
+

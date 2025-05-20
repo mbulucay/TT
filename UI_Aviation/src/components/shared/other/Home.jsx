@@ -1,26 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
-import ImageDisplay from "../../maritime/msc/ImageDisplay";
 import {
   TileLayer,
-  FeatureGroup,
-  Popup,
   MapContainer,
-  useMapEvents,
   Marker,
-  Polyline,
 } from "react-leaflet";
 import L from "leaflet";
 import ReactDOMServer from "react-dom/server";
 import { IoMdNavigate } from "react-icons/io";
-import { MscService } from "../../../api/services/maritime/msc/MscService";
-import { VesselCrewRelationService } from "../../../api/services/maritime/vessel_crew_relation/VesselCrewRelationService";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { FiInfo } from "react-icons/fi";
 import path from "./path.json";
 import { antPath } from "leaflet-ant-path";
 import { useLeafletContext } from "@react-leaflet/core";
@@ -58,11 +48,11 @@ function Home() {
 
   const fetchVesselInfo = async () => {
     try {
-      const response = await MscService.getMscByImo(
-        imo,
-        user_data.access_token
-      );
-      setVesselInfo(response);
+      // const response = await MscService.getMscByImo(
+      //   imo,
+      //   user_data.access_token
+      // );
+      // setVesselInfo(response);
     } catch (error) {
       console.error("Error fetching vessel info:", error);
     }
@@ -70,11 +60,11 @@ function Home() {
 
   const fetchCrewInfo = async () => {
     try {
-      const response = await VesselCrewRelationService.getCrewRelationByImo(
-        user_data.access_token,
-        imo
-      );
-      setCrewInfo(response.sort((a, b) => a.id - b.id));
+      // const response = await VesselCrewRelationService.getCrewRelationByImo(
+      //   user_data.access_token,
+      //   imo
+      // );
+      // setCrewInfo(response.sort((a, b) => a.id - b.id));
     } catch (error) {
       console.error("Error fetching crew info:", error);
     }
@@ -84,34 +74,6 @@ function Home() {
     fetchVesselInfo();
     fetchCrewInfo();
   }, []);
-
-  // useEffect(() => {
-  //   const fetchShips = async () => {
-  //     try {
-  //       console.log("asdasd");
-  //       const response = await axios.get(
-  //         "https://stream.aisstream.io/v0/stream",
-  //         {
-  //           APIkey: API_KEY,
-  //           BoundingBoxes: [
-  //             [
-  //               [-11.0, 104.0],
-  //               [2.0, 126.0],
-  //             ],
-  //           ],
-  //         }
-  //       );
-  //       console.log("asdasd", response);
-  //       setShips(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching ships:", error);
-  //     }
-  //   };
-
-  //   const interval = setInterval(fetchShips, 10000); // Fetch data every 5 seconds
-
-  //   return () => clearInterval(interval); // Cleanup interval
-  // }, []); // Empty dependency array ensures this effect runs only once
 
   const antPathOptions = {
     delay: 1000,
@@ -221,7 +183,7 @@ function Home() {
                 <div className="bg-gradient-to-b from-blue-800 to-white p-4 rounded-3xl">
                   <div className="flex justify-around p-4 gap-2 bg-blue-200 rounded-2xl">
                     <div className="h-56 w-72 p-1 shadow-xl bg-white">
-                      <ImageDisplay image_url={vessel_info.images} />
+                      {/* <ImageDisplay image_url={vessel_info.images} /> */}
                       <div className="w-full text-center mt-2 font-extrabold">
                         {vessel_info.imo}
                       </div>

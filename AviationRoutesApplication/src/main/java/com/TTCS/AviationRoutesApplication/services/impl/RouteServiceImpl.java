@@ -10,13 +10,11 @@ import com.TTCS.AviationRoutesApplication.model.Transportation;
 import com.TTCS.AviationRoutesApplication.repositories.LocationRepository;
 import com.TTCS.AviationRoutesApplication.repositories.TransportationRepository;
 import com.TTCS.AviationRoutesApplication.services.RouteService;
-import com.TTCS.AviationRoutesApplication.mapper.enums.DayOfWeekMapper;
 import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

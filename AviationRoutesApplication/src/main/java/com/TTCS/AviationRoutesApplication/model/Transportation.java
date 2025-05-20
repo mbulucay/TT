@@ -19,8 +19,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.UniqueConstraint;
-import java.util.List;
-import java.time.DayOfWeek;
 
 @Entity
 @Table(name = "transportations",

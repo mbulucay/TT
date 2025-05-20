@@ -6,7 +6,6 @@ import Home from "./components/shared/other/Home.jsx";
 import Layout from "./components/shared/layout/Layout.jsx";
 import useAuth from "./hooks/useAuth.jsx";
 import Info from "./components/shared/app_pages/Info.jsx";
-import PortsMap from "./components/maritime/subdirectories/port/map/PortsMap.jsx";
 import Locations from "./components/tt/locations/Locations.jsx";
 import Transportation from "./components/tt/transportation/Transportation.jsx";
 import AviationRoutes from "./components/tt/routes/AviationRoutes.jsx";
@@ -15,23 +14,7 @@ import TransportationAdd from "./components/tt/transportation/TransportationAdd"
 
 function App() {
 
-
   const auth = useAuth();
-
-  // useEffect(() => {
-  //   const clearLocalStorage = (event) => {
-  //     // Check if the event's returnValue is not set
-  //     if (!event.returnValue) {
-  //       localStorage.clear();
-  //     }
-  //   };
-
-  //   window.addEventListener('beforeunload', clearLocalStorage);
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', clearLocalStorage);
-  //   };
-  // }, []);
 
   return (
     <Routes>
@@ -54,6 +37,7 @@ function App() {
         <Route path="routes" element={<AviationRoutes />} />
 
         <Route path="info" element={<Info />} />
+        
       </Route>
 
       {/* Catch All Routes */}

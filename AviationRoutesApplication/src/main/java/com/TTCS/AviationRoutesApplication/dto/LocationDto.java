@@ -1,7 +1,5 @@
 package com.TTCS.AviationRoutesApplication.dto;
 
-import com.TTCS.AviationRoutesApplication.model.Location;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
