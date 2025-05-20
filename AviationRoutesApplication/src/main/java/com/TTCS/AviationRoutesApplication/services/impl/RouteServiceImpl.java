@@ -1,19 +1,16 @@
 package com.TTCS.AviationRoutesApplication.services.impl;
 
-import com.TTCS.AviationRoutesApplication.dto.LocationDto;
-import com.TTCS.AviationRoutesApplication.dto.RouteDto;
-import com.TTCS.AviationRoutesApplication.dto.TransportationDto;
 import com.TTCS.AviationRoutesApplication.dto.request.RouteRequestDto;
 import com.TTCS.AviationRoutesApplication.dto.response.RouteResponseDto;
 import com.TTCS.AviationRoutesApplication.enums.TransportationType;
 import com.TTCS.AviationRoutesApplication.mapper.LocationMapper;
-import com.TTCS.AviationRoutesApplication.mapper.RouteMapper;
 import com.TTCS.AviationRoutesApplication.mapper.TransportationMapper;
 import com.TTCS.AviationRoutesApplication.model.Location;
 import com.TTCS.AviationRoutesApplication.model.Transportation;
 import com.TTCS.AviationRoutesApplication.repositories.LocationRepository;
 import com.TTCS.AviationRoutesApplication.repositories.TransportationRepository;
 import com.TTCS.AviationRoutesApplication.services.RouteService;
+import com.TTCS.AviationRoutesApplication.mapper.enums.DayOfWeekMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +24,6 @@ import java.util.stream.Collectors;
 @Service
 public class RouteServiceImpl implements RouteService {
 
-    @Autowired
-    private RouteMapper routeMapper;
     
     @Autowired
     private LocationMapper locationMapper;
@@ -116,25 +111,6 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public RouteDto createRoute(RouteDto routeDto) {
-        // This method would be used to create a predefined route
-        // Implementation would depend on how routes are stored in the system
-        throw new UnsupportedOperationException("Route creation not implemented");
-    }
-
-    @Override
-    public RouteDto updateRoute(Long id, RouteDto routeDto) {
-        // Update a predefined route
-        throw new UnsupportedOperationException("Route update not implemented");
-    }
-
-    @Override
-    public boolean deleteRoute(Long id) {
-        // Delete a predefined route
-        throw new UnsupportedOperationException("Route deletion not implemented");
-    }
-
-    @Override
     public List<RouteResponseDto> findRoutes(RouteRequestDto requestDto) {
         return getRoutesByOriginAndDestination(requestDto);
     }
@@ -181,26 +157,8 @@ public class RouteServiceImpl implements RouteService {
                 transportation.getOperatingDays() == null || 
                 transportation.getOperatingDays().isEmpty() || 
                 transportation.getOperatingDays().stream()
-                    .anyMatch(day -> dayToIndex(day) == dayIndex)
+                    .anyMatch(day -> DayOfWeekMapper.dayToIndex(day) == dayIndex)
             );
-    }
-    
-    /**
-     * Convert our DayOfWeek enum to a numeric index
-     * 
-     * @param day DayOfWeek enum value
-     * @return 0-based index where SUNDAY=0, MONDAY=1, etc.
-     */
-    private int dayToIndex(com.TTCS.AviationRoutesApplication.enums.DayOfWeek day) {
-        return switch (day) {
-            case SUNDAY -> 0;
-            case MONDAY -> 1;
-            case TUESDAY -> 2;
-            case WEDNESDAY -> 3;
-            case THURSDAY -> 4;
-            case FRIDAY -> 5;
-            case SATURDAY -> 6;
-        };
     }
     
     /**

@@ -22,5 +22,4 @@ public class RouteRequestDto {
     
     @NotBlank(message = "Destination location code is required")
     private String destinationLocation;
-    
 }

@@ -14,12 +14,8 @@ public interface TransportationService {
     
     List<TransportationDto> getTransportationsByType(TransportationType type);
     
-//     List<TransportationDto> getTransportationsByOriginAndDestination(
-//             String originLocationCode, String destinationLocationCode);
-
     List<TransportationDto> getTransportationsByOriginAndDestination(
         Location originLocation, Location destinationLocation);
-    
             
     TransportationDto createTransportation(TransportationDto transportationDto);
     

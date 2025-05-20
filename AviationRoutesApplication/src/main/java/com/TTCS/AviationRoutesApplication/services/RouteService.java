@@ -19,9 +19,4 @@ public interface RouteService {
     
     List<RouteResponseDto> findRoutes(RouteRequestDto routeRequestDto);
     
-    RouteDto createRoute(RouteDto routeDto);
-    
-    RouteDto updateRoute(Long id, RouteDto routeDto);
-    
-    boolean deleteRoute(Long id);
 }
