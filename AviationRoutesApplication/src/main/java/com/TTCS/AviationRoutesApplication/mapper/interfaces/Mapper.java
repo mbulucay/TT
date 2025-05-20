@@ -1,4 +1,4 @@
-package com.TTCS.AviationRoutesApplication.mapper;
+package com.TTCS.AviationRoutesApplication.mapper.interfaces;
 
 public interface Mapper<E, D> {
     E toEntity(D dto);

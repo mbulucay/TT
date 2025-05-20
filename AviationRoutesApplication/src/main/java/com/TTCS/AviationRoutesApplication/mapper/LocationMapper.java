@@ -3,6 +3,7 @@ package com.TTCS.AviationRoutesApplication.mapper;
 import com.TTCS.AviationRoutesApplication.dto.LocationDto;
 import com.TTCS.AviationRoutesApplication.model.Location;
 import org.springframework.stereotype.Component;
+import com.TTCS.AviationRoutesApplication.mapper.interfaces.Mapper;
 
 @Component
 public class LocationMapper implements Mapper<Location, LocationDto> {
