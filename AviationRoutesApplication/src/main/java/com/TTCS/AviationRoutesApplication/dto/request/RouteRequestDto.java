@@ -1,9 +1,8 @@
 package com.TTCS.AviationRoutesApplication.dto.request;
 
-import java.time.LocalDate;
 import java.util.List;
 
-import com.TTCS.AviationRoutesApplication.enums.TransportationType;
+import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor 
 @Builder
 public class RouteRequestDto {
     
@@ -22,4 +21,6 @@ public class RouteRequestDto {
     
     @NotBlank(message = "Destination location code is required")
     private String destinationLocation;
+    
+    private List<DayOfWeek> operatingDays;
 }

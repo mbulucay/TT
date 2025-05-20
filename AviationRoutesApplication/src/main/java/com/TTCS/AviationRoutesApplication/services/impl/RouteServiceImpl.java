@@ -11,15 +11,19 @@ import com.TTCS.AviationRoutesApplication.repositories.LocationRepository;
 import com.TTCS.AviationRoutesApplication.repositories.TransportationRepository;
 import com.TTCS.AviationRoutesApplication.services.RouteService;
 import com.TTCS.AviationRoutesApplication.mapper.enums.DayOfWeekMapper;
+import com.TTCS.AviationRoutesApplication.enums.DayOfWeek;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.TTCS.AviationRoutesApplication.dto.TransportationDto;
 
 @Service
 public class RouteServiceImpl implements RouteService {
@@ -39,31 +43,31 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public List<RouteResponseDto> getRoutesByOriginAndDestination(RouteRequestDto routeRequestDto) {
-        return getRoutesByOriginAndDestination(
-            routeRequestDto.getOriginLocation(), 
+        List<RouteResponseDto> routes = getRoutesByOriginAndDestination(
+            routeRequestDto.getOriginLocation(),
             routeRequestDto.getDestinationLocation()
         );
-    }
-    
-    /**
-     * Find routes between origin and destination, optionally filtering by date
-     * 
-     * @param routeRequestDto The route request containing origin and destination
-     * @param date Optional date to filter routes by operating days
-     * @return List of valid routes, filtered by date if provided
-     */
-    public List<RouteResponseDto> getRoutesByOriginAndDestination(RouteRequestDto routeRequestDto, LocalDate date) {
-        List<RouteResponseDto> routes = getRoutesByOriginAndDestination(routeRequestDto);
-        
-        if (date == null) {
-            return routes;
+
+        if (routeRequestDto.getOperatingDays() != null && !routeRequestDto.getOperatingDays().isEmpty()) {
+            routes = routes.stream()
+                .filter(route -> {
+                    // Rotadaki tüm ulaşım araçlarının çalışma günlerinin kesişimini bul
+                    Set<DayOfWeek> commonDays = route.getTransportations().stream()
+                        .map(transportation -> new HashSet<>(transportation.getOperatingDays()))
+                        .reduce((days1, days2) -> {
+                            days1.retainAll(days2); // Kesişim kümesi
+                            return days1;
+                        })
+                        .orElse(new HashSet<>());
+
+                    // İstek günlerinden herhangi biri kesişim kümesinde var mı?
+                    return routeRequestDto.getOperatingDays().stream()
+                        .anyMatch(commonDays::contains);
+                })
+                .collect(Collectors.toList());
         }
-        
-        // Filter routes based on operating days
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-        return routes.stream()
-            .filter(route -> isRouteOperatingOnDay(route, dayOfWeek))
-            .collect(Collectors.toList());
+
+        return routes;
     }
 
     @Override
@@ -113,52 +117,6 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public List<RouteResponseDto> findRoutes(RouteRequestDto requestDto) {
         return getRoutesByOriginAndDestination(requestDto);
-    }
-    
-    /**
-     * Find routes with an optional date parameter to filter by operating days
-     * 
-     * @param requestDto The route request containing origin and destination
-     * @param date The date to check for transportation availability
-     * @return List of valid routes operating on the given date
-     */
-    public List<RouteResponseDto> findRoutes(RouteRequestDto requestDto, LocalDate date) {
-        List<RouteResponseDto> allRoutes = getRoutesByOriginAndDestination(requestDto);
-        
-        if (date == null) {
-            return allRoutes;
-        }
-        
-        // Get day of week (1=Monday, 7=Sunday in Java's DayOfWeek)
-        DayOfWeek dayOfWeek = date.getDayOfWeek();
-        
-        // Filter routes based on operating days
-        return allRoutes.stream()
-            .filter(route -> isRouteOperatingOnDay(route, dayOfWeek))
-            .collect(Collectors.toList());
-    }
-    
-    /**
-     * Check if a route is operating on a specific day of the week
-     * 
-     * @param route The route to check
-     * @param dayOfWeek The day of week to check against
-     * @return true if all transportations in the route operate on the given day
-     */
-    private boolean isRouteOperatingOnDay(RouteResponseDto route, DayOfWeek dayOfWeek) {
-        // Convert Java DayOfWeek to our custom DayOfWeek enum index
-        // Java's DayOfWeek: MONDAY=1, SUNDAY=7
-        // Our DayOfWeek: SUNDAY=0, MONDAY=1, ..., SATURDAY=6
-        int dayIndex = (dayOfWeek.getValue() % 7); // Convert to 0-based index where 0=SUNDAY
-        
-        // A route operates on a day if ALL of its transportations operate on that day
-        return route.getTransportations().stream()
-            .allMatch(transportation -> 
-                transportation.getOperatingDays() == null || 
-                transportation.getOperatingDays().isEmpty() || 
-                transportation.getOperatingDays().stream()
-                    .anyMatch(day -> DayOfWeekMapper.dayToIndex(day) == dayIndex)
-            );
     }
     
     /**

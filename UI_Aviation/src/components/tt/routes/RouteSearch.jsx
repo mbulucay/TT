@@ -24,8 +24,26 @@ function RouteSearch() {
         }
     });
 
+    const [formData, setFormData] = useState({
+        originLocation: null,
+        destinationLocation: null,
+        operatingDays: ["0", "1", "2", "3", "4", "5", "6"]
+    });
+
+    const daysOfWeek = [
+        { label: "SUNDAY", value: "0" },
+        { label: "MONDAY", value: "1" },
+        { label: "TUESDAY", value: "2" },
+        { label: "WEDNESDAY", value: "3" },
+        { label: "THURSDAY", value: "4" },
+        { label: "FRIDAY", value: "5" },
+        { label: "SATURDAY", value: "6" },
+    ];
+
     const [routeResult, setRouteResult] = useState(null);
     const [error, setError] = useState(null);
+
+    const allDaysSelected = formData.operatingDays.length === daysOfWeek.length;
 
     // Fetch all locations on component mount
     useEffect(() => {
@@ -62,6 +80,14 @@ function RouteSearch() {
                 ...(field === 'city' && { location: null })
             }
         }));
+
+        // Update formData when location is selected
+        if (field === 'location') {
+            setFormData(prev => ({
+                ...prev,
+                [`${type}Location`]: value
+            }));
+        }
 
         // Update filtered locations based on selection
         if (field === 'country') {
@@ -106,11 +132,92 @@ function RouteSearch() {
         }
     };
 
+    const handleDaySelection = (dayValue) => {
+        setFormData(prev => {
+            const updatedDays = prev.operatingDays.includes(dayValue)
+                ? prev.operatingDays.filter(day => day !== dayValue)
+                : [...prev.operatingDays, dayValue];
+            
+            return {
+                ...prev,
+                operatingDays: updatedDays
+            };
+        });
+    };
+
+    const handleFindRoutes = async () => {
+        try {
+            console.log(JSON.stringify(formData));
+
+            console.log(JSON.stringify( {
+                originLocation: formData.originLocation.locationCode,
+                destinationLocation: formData.destinationLocation.locationCode,
+                operatingDays: formData.operatingDays
+            }));
+            
+            const response = await axios.post('/routes/find', {
+                originLocation: formData.originLocation.locationCode,
+                destinationLocation: formData.destinationLocation.locationCode,
+                operatingDays: formData.operatingDays
+            });
+            setRouteResult(response.data);
+            setError(null);
+        } catch (err) {
+            setError('Failed to find routes');
+            setRouteResult(null);
+        }
+    };
+
+    const handleToggleAllDays = () => {
+        setFormData(prev => ({
+            ...prev,
+            operatingDays: allDaysSelected ? [] : daysOfWeek.map(day => day.value)
+        }));
+    };
+
     return (
         <div className="route-search-container">
             <h1>Route Search</h1>
             
             <div className="search-form">
+                <div className="days-selection-container mb-4">
+                    <div className="flex justify-between items-center mb-3">
+                        <h2 className="text-sm font-semibold">Operating Days</h2>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={allDaysSelected}
+                                onChange={handleToggleAllDays}
+                                className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                            />
+                            <span className="text-xs text-gray-600">
+                                {allDaysSelected ? 'Deselect All' : 'Select All'}
+                            </span>
+                        </label>
+                    </div>
+                    <div className="flex justify-between gap-2">
+                        {daysOfWeek.map(day => (
+                            <button
+                                key={day.value}
+                                className={`
+                                    w-32 h-7 rounded-md text-xs font-medium
+                                    transform transition-all duration-200
+                                    flex items-center justify-center
+                                    ${formData.operatingDays.includes(day.value)
+                                        ? 'bg-gradient-to-b from-blue-500 to-blue-600 text-white shadow-sm scale-105 hover:from-blue-600 hover:to-blue-700'
+                                        : 'bg-white text-gray-400 hover:bg-gray-50 hover:text-gray-600 border border-gray-200'
+                                    }
+                                    hover:shadow-sm active:scale-95
+                                `}
+                                onClick={() => handleDaySelection(day.value)}
+                                type="button"
+                            >
+                                {day.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 <div className="location-sections-container">
                     {/* Origin Selection */}
                     <div className="location-section">
@@ -169,7 +276,6 @@ function RouteSearch() {
                             }
                         </select>
                     </div>
-
                     {/* Destination Selection */}
                     <div className="location-section">
                         <h2>Destination</h2>
@@ -230,10 +336,15 @@ function RouteSearch() {
                 </div>
 
                 <button 
-                    onClick={handleSearch}
-                    disabled={!selectedValues.origin.location || !selectedValues.destination.location}
+                    // onClick={handleSearch}
+                    // disabled={!selectedValues.origin.location || !selectedValues.destination.location}
+                    onClick={handleFindRoutes}
+                    disabled={!selectedValues.origin.location || 
+                             !selectedValues.destination.location ||
+                             formData.operatingDays.length === 0}
+                    className="mt-6"
                 >
-                    Search Route
+                    Find Routes
                 </button>
             </div>
 
