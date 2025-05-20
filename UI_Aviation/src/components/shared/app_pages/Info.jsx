@@ -7,51 +7,37 @@ function Info() {
       <div className="flex flex-col bg-blue-300 p-4 drop-shadow-2xl shadow-2xl gap-2">
         <h2 className="font-bold">About Us</h2>
         <p>
-          &emsp; The enterprise application developed is a comprehensive suite
-          designed to enhance maritime situational awareness by utilizing
-          diverse datasets and functionalities provided through several
-          reference applications. Each application serves a unique purpose
-          within the maritime domain, tailored to meet the operational needs of
-          maritime authorities and organizations.
-          <br /> <br />
-          1. <strong>Person of Maritime Interest Application:</strong> This
-          application allows users to manage data regarding individuals who are
-          of interest in maritime activities, including owners, crew members,
-          and passengers. It supports functionalities such as creating,
-          updating, and annotating profiles, thereby aiding in heightened
-          security and monitoring efforts.
-          <br /> 2. <strong>IHS Fairplay Application:</strong> Focuses on
-          processing information related to vessels, maritime companies, and
-          shipping entities. It integrates data from IHS Fairplay to validate
-          and manage vessel information, enhancing the accuracy of maritime
-          operations.
-          <br /> 3. <strong>Lloyds MIU Application:</strong> This application
-          leverages data from Lloyd's Maritime Intelligence to offer insights
-          into vessel movements, company profiles, and maritime incidents,
-          facilitating deeper risk assessments and operational planning.
-          <br /> 4. <strong>MOU Detention Lists Application:</strong> It
-          supports the management of detention lists, helping users track and
-          scrutinize vessels that have been detained or banned, which is crucial
-          for regulatory compliance and safety enforcement.
-          <br /> 5. <strong>MSc Application:</strong> Utilizes ship
-          characteristic data from the Office of Naval Intelligence to provide
-          detailed insights into vessel specifications, supporting thorough
-          assessments and investigations of vessels of interest.
-          <br /> 6. <strong>Ports Application:</strong> Provides exhaustive
-          information on ports worldwide, enabling users to access detailed
-          descriptions of port facilities and services, which is vital for
-          logistical and operational planning.
-          <br /> 7. <strong>Shipping Routes Network Application:</strong> This
-          tool allows for the creation and management of shipping routes,
-          assisting in the planning and optimization of maritime navigation
-          based on historical and real-time data.
-          <br /> <br />
-          &emsp;Each application is integrated into a robust web interface built
-          with ReactJS, ensuring a responsive and user-friendly experience for
-          end-users. This interface supports real-time data interaction and
-          visualization, making it an indispensable tool for maritime operations
-          that demand precision, reliability, and scalability.
+         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate iure, 
+         blanditiis earum tempora consequatur fugit id sit a iste vitae facere voluptates perspic
+         iatis cum alias praesentium sapiente nam ea nobis! Possimus, suscipit nulla id asperiores quas de
+         lectus ex dolor, voluptatibus excepturi quasi laboriosam quis ab nostrum quam dignissimos iure li
+         bero fugiat. Cumque sequi enim voluptates nostrum molestiae! Voluptates, corrupti nemo repellendu
+         s atque mollitia tempore suscipit quas alias eum reprehenderit perferendis impedit, rerum quasi el
+         igendi. Consectetur architecto cupiditate adipisci officiis dolorum laboriosam accusantium itaque
+          asperiores. Tempora, ullam inventore. Velit sunt reprehenderit excepturi nesciunt tempora, nihil 
+          accusamus perspiciatis aperiam distinctio fugit, maiores eius, aut mollitia laboriosam quam cupidi
+          tate ea. Eveniet, accusamus? Consectetur nihil voluptatum quaerat! Ipsam labore cumque iure, provi
+          ent nesciunt dolorem, doloribus sapiente voluptatum quisquam consequatur quas vel magni harum dolor
+          um, neque minus magnam! Eaque culpa perferendis corporis praesentium perspiciatis harum, veritatis te
+          mporibus iure ad id hic expedita nemo beatae excepturi impedit nulla incidunt, quasi porro ea reic
+          iendis aliquam! Voluptate rerum similique, sed saepe fugit placeat, laborum aliquam perfer
+          endis doloremque aperiam totam modi sunt unde illo nesciunt repellat porro sequi quaerat. Du
+          cimus repellendus unde quae sint cupiditate fugit ipsum error adipisci assumenda et nesciu
+          nt esse, officia commodi veniam nihil harum blanditiis aperiam, ipsam, numquam laboriosam re
+          m! Saepe necessitatibus voluptatum vitae eveniet aliquam deleniti iusto. Ducimus adipisci cupi
+          ditate dicta quibusdam nobis ut blanditiis qui dolores eveniet alias non, totam amet harum ipsa, 
+          reprehenderit aperiam doloremque ratione odit consectetur tempore accusantium facere, laborum quas.
+          Doloremque commodi quasi nobis, delectus error maxime natus est fuga reprehenderit voluptatibus eius 
+          nihil magnam pariatur porro ex aut nesciunt ratione, veritatis doloribus architecto dolorum alias esse
+          ullam rem? Atque velit laborum hic voluptatum dignissimos. Porro at dolorum nemo blanditiis ut tota
+          m voluptatibus odit quos, dolor ullam officiis maiores accusantium unde quidem provident suscipit 
+          voluptatum a quis quo culpa sequi. Facilis aperiam doloribus neque odit eius esse itaque eveniet 
+          quos distinctio, inventore alias corrupti cupiditate repellendus dignissimos, pariatur recusandae
+          ducimus eligendi nulla adipisci, laudantium voluptatibus harum obcaecati blanditiis maxime! Volu
+          0ptatibus numquam quisquam, voluptates quos atque eos cumque? A, minus aliquam rerum laborum volup
         </p>
+             
       </div>
       <div className="flex flex-col bg-blue-300 p-4 drop-shadow-2xl shadow-2xl gap-2">
         <h2 className="font-bold">Logo</h2>

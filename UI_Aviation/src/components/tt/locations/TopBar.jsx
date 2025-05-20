@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FaPlusCircle,
-  FaArrowAltCircleDown,
-  FaArrowAltCircleUp,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { exportJsonData } from "../../lib/file_operations/file_operations";
-import { useSelector } from "react-redux";
 
 const buttonClasses = `flex place-items-center gap-2 
   bg-blue-100 hover:bg-blue-600
@@ -15,8 +11,6 @@ const buttonClasses = `flex place-items-center gap-2
   hover:border-transparent rounded `;
 
 function TopBar() {
-  const { selectedRows } = useSelector((state) => state.select_rows);
-  const { role } = useSelector((state) => state.auth);
 
   return (
     <div className="flex justify-end gap-3">
