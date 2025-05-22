@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.TTCS.AviationRoutesApplication.dto.TransportationDto;
-
 @Service
 public class RouteServiceImpl implements RouteService {
 
@@ -211,84 +209,3 @@ public class RouteServiceImpl implements RouteService {
         return validRoutes;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// package com.TTCS.AviationRoutesApplication.services.impl;
-
-// import com.TTCS.AviationRoutesApplication.dto.RouteDto;
-// import com.TTCS.AviationRoutesApplication.dto.request.RouteRequestDto;
-// import com.TTCS.AviationRoutesApplication.dto.response.RouteResponseDto;
-// import com.TTCS.AviationRoutesApplication.repositories.TransportationRepository;
-// import com.TTCS.AviationRoutesApplication.services.RouteService;
-// import com.TTCS.AviationRoutesApplication.mapper.RouteMapper;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
-
-// import java.util.List;
-
-// @Service
-// public class RouteServiceImpl implements RouteService {
-
-
-//     @Autowired
-//     private RouteMapper routeMapper;
-
-//     @Override
-//     public List<RouteResponseDto> getRoutesByOriginAndDestination(RouteRequestDto routeRequestDto) {
-//         return null;
-//     }
-
-//     @Override
-//     public List<RouteResponseDto> getRoutesByOriginAndDestination(String originLocationCode, String destinationLocationCode) {
-//         return null;
-//     }
-
-//     @Override
-//     public List<RouteResponseDto> getRoutesByOriginAndDestination(Long originLocationId, Long destinationLocationId){
-//         return null;
-//     }
-
-//     @Override
-//     public RouteDto createRoute(RouteDto routeDto) {
-//         return null;
-//     }
-
-//     @Override
-//     public RouteDto updateRoute(Long id, RouteDto routeDto) {
-//         return null;
-//     }
-
-//     @Override
-//     public boolean deleteRoute(Long id) {
-//         return false;
-//     }
-
-//     @Override
-//     public List<RouteResponseDto> findRoutes(RouteRequestDto requestDto) {
-//         return null;
-//     }
-// } 
